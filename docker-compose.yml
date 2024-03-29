@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    container_name: my-food-order-app
+    depends_on:
+      - db
+    image: my-food-order-app:latest
+    ports:
+      - 8000:8000
+    volumes:
+      - source: .
+        target: /app
+        type: bind
+    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+  db:
+    container_name: my-food-order-db
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: mydatabase
+    ports:
+      - 27017:27017
