@@ -17,10 +17,16 @@ class ProductRepositoryDto:
 
 
 class ProductRepositoryInterface(RepositoryInterface):
+    def create(self, entity_dto: ABC) -> None:
+        pass
+
     @abstractmethod
     def find(self, uuid: str) -> ProductRepositoryDto | None:
         pass
 
     @abstractmethod
     def list(self, filters: dict) -> list[ProductRepositoryDto]:
+        pass
+
+    def update(self, entity_dto: ABC) -> None:
         pass

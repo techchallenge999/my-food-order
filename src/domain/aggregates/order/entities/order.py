@@ -18,12 +18,14 @@ class Order(OrderInterface):
         self,
         items: list[OrderItemInterface],
         order_repository: OrderRepositoryInterface,
+        payment_uuid: UUID,
         product_repository: ProductRepositoryInterface,
         uuid: UUID,
         status: OrderStatus = OrderStatus.PENDING_PAYMENT,
         user_uuid: UUID | None = None,
     ):
         self._items = items
+        self._payment_uuid = payment_uuid
         self._status = status
         self._total_amount = self._get_total_amount(product_repository)
         self._user_uuid = user_uuid
